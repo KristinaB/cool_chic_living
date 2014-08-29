@@ -11,6 +11,7 @@ require 'mina/bundler'
 require 'mina/git'
 
 set :domain,      'coolchicliving.com'
+set :domain,      'makevoid.com'
 set :deploy_to,   "/www/#{app_name}"
 set :repository,  "git://github.com/#{user}/#{app_name}"
 set :branch,      'master'
@@ -33,14 +34,18 @@ end
 task :setup => :environment do
   queue! %[mkdir -p "#{deploy_to}/shared/log"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/log"]
+  queue! %[mkdir -p "#{deploy_to}/shared/data"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/data"]
+  queue! %[mkdir -p "#{deploy_to}/shared/images"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/images"]
 end
 
 
 task :symlink => :environment do
-    queue 'rm -rf content/images'
-    queue 'rm -rf content/data'
-    queue  "ln -s #{deploy_to}/shared/data   content/data"
-    queue  "ln -s #{deploy_to}/shared/images content/images"
+  queue 'rm -rf content/images'
+  queue 'rm -rf content/data'
+  queue  "ln -s #{deploy_to}/shared/data   content/data"
+  queue  "ln -s #{deploy_to}/shared/images content/images"
 end
 
 desc "Deploys the current version to the server."

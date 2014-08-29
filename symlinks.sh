@@ -2,20 +2,20 @@
 
 
 cd ~/Sites/cool_chic_living
-cd content/themes/portfolio/content
-ln -s ../../../images images
+ln -s index.js app.js
+
+cd ~/Sites/cool_chic_living
+cd content/themes
+ln -s portfolio current
+
+cd ~/Sites/cool_chic_living
+ln -s content/themes/current public
 
 cd ~/Sites/cool_chic_living
 cd content/themes/portfolio
 ln -s ../../../core/client/assets ghost
 
 cd ~/Sites/cool_chic_living
-ln -s index.js app.js
-
-cd ~/Sites/cool_chic_living
-ln -s content/themes/current public
-
-cd ~/Sites/cool_chic_living
-cd content/themes
-ln -s portfolio current
+cd content/themes/portfolio/content
+ln -s ../../../images images
 
