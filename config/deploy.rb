@@ -58,6 +58,8 @@ task :deploy => :environment do
     invoke :symlink
     # invoke :'bundle:install'
 
+    queue "npm install --production"
+
     to :launch do
       queue 'mkdir -p tmp'
       queue 'touch tmp/restart.txt'
