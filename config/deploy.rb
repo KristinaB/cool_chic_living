@@ -42,11 +42,13 @@ end
 
 
 task :symlink => :environment do
-  queue 'mkdir -p content'
   queue 'rm -rf content/images'
   queue 'rm -rf content/data'
   queue  "ln -s #{deploy_to}/shared/data   content/data"
   queue  "ln -s #{deploy_to}/shared/images content/images"
+  queue 'mkdir -p public/content'
+  queue  "ln -s #{deploy_to}/shared/data   public/content/data"
+  queue  "ln -s #{deploy_to}/shared/images public/content/images"
 end
 
 desc "Deploys the current version to the server."
