@@ -42,6 +42,7 @@ end
 
 
 task :symlink => :environment do
+  queue 'mkdir -p content'
   queue 'rm -rf content/images'
   queue 'rm -rf content/data'
   queue  "ln -s #{deploy_to}/shared/data   content/data"
@@ -58,7 +59,8 @@ task :deploy => :environment do
     invoke :symlink
     # invoke :'bundle:install'
 
-    queue "npm install --production"
+    queue "rm -rf node_modules"
+    queue "/usr/local/bin/npm install --production"
 
     to :launch do
       queue 'mkdir -p tmp'
